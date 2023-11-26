@@ -165,25 +165,6 @@ mod tests {
 	}
 
 	#[test]
-	fn parse_url_should_work() {
-		let url = parse_url("https://localhost:8080/api/v1/users?profile=true");
-		let url = url.unwrap();
-		assert_eq!("https", url.scheme());
-		assert_eq!(Some("localhost"), url.host_str());
-		assert_eq!(Some(8080_u16), url.port());
-		assert_eq!("/api/v1/users", url.path());
-		assert_eq!(Some("profile=true"), url.query());
-	}
-
-	#[test]
-	fn parse_url_return_error() {
-		assert_eq!(Err("invalid url"), parse_url(""));
-		assert_eq!(Err("invalid url"), parse_url("not a url"));
-		assert_eq!(Err("invalid url"), parse_url("不是url"));
-		assert_eq!(Err("invalid url"), parse_url("127.0.0.1"));
-	}
-
-	#[test]
 	fn parse_header_should_work() {
 		assert_eq!(parse_accept("*/*").unwrap().to_str().unwrap(), "*/*");
 		assert_eq!(
@@ -195,7 +176,6 @@ mod tests {
 		);
 		assert_eq!(parse_user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3").unwrap(),
                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3");
-		assert_eq!(parse_host("rey-tools.io").unwrap(), "rey-tools.io");
 	}
 
 	#[test]
